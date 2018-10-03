@@ -7,7 +7,7 @@ Showcasing how render prop components can be used to manage state. In this examp
 ## Installation
 
 * `git clone git@github.com:the-road-to-learn-react/react-render-prop-component-for-state.git`
-* cd react-render-props-example
+* cd react-render-prop-component-for-state
 * npm install
 * npm start
 * visit `http://localhost:3000`
