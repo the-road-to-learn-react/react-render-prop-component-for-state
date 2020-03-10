@@ -1,53 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const list = ['a', 'b', 'c'];
+const State = ({ initialState, children }) => {
+  const [value, setValue] = React.useState(initialState);
 
-class State extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: props.initialState,
-    };
-  }
-
-  onUpdateState = value => {
-    this.setState({ value });
+  const handleValue = value => {
+    setValue(value);
   };
 
-  render() {
-    return this.props.children(this.state.value, this.onUpdateState);
-  }
-}
+  return children(value, handleValue);
+};
 
 const App = () => (
   <State initialState={true}>
-    {(toggle, onToggleList) => (
+    {(toggle, handleToggle) => (
       <div>
-        <Toggle
-          toggle={toggle}
-          onToggleList={() => onToggleList(!toggle)}
-        />
-        {toggle && <List list={list} />}
+        <button type="button" onClick={() => handleToggle(!toggle)}>
+          {toggle ? 'Hide' : 'Show'}
+        </button>
+
+        {toggle && <span>Hello React</span>}
       </div>
     )}
   </State>
 );
-
-const Toggle = ({ toggle, onToggleList }) => (
-  <button type="button" onClick={onToggleList}>
-    {toggle ? 'Hide' : 'Show'}
-  </button>
-);
-
-const List = ({ list }) => (
-  <ul>
-    {list.map((item, index) => (
-      <Item key={index} item={item} />
-    ))}
-  </ul>
-);
-
-const Item = ({ item }) => <li>{item}</li>;
 
 export default App;
